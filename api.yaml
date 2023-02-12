@@ -1,0 +1,13 @@
+swagger: "2.0"
+info:
+  title: commerce project...
+  description: This documentation is made by Negar Miralaie
+  # version: 1.0
+  # contact: 
+    # email: miralaienegar@gmail.com
+  # servers:
+    # -url: "http:localhost:5000/"
+
+schemas: [http]
+
+paths:
