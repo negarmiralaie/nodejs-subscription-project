@@ -1,12 +1,4 @@
-const bcrypt = require('bcrypt');
-
 const Helper = {
-    Hash: async (password) => { //^ For hashing passwords
-      console.log(password);
-      const salt = await bcrypt.genSalt(10);
-      return await bcrypt.hash(password, salt);
-    },
-
     paginate: async (base, page, args, limit) => {
         page = Number(page);
         page = !page || page < 1 ? null : page;
