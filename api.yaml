@@ -1,13 +1,44 @@
 swagger: "2.0"
 info:
-  title: commerce project...
+  title: subscription project...
   description: This documentation is made by Negar Miralaie
   # version: 1.0
-  # contact: 
-    # email: miralaienegar@gmail.com
-  # servers:
-    # -url: "http:localhost:5000/"
+  contact: 
+    email: miralaienegar@gmail.com
 
 schemas: [http]
 
 paths:
+  /api/v1/subscription/create:
+    post:
+      summary: For creating a subscription.
+      description: name and price and isAvtive are required to create a subscription.
+      parameters:
+      - in: body
+        name: create subscription
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              required: true
+            price:
+              type: number
+              required: float
+            isActive:
+              type: boolean
+              required: true
+    responses:
+      200:
+        description: Success. Subscription is created.
+        schema:
+          type: string
+#       # 400:
+#         # description: Bad Request. New password and confirmNewPassword do not match.
+#         # schema:
+#           # type: string
+#       # 401:
+#         # description: Unauthorized. Must be logged in and have enough permissions...
+#       # 404:
+#         # description: Not Foud. CRUD.Duplicated. -> When abbrvCode is not unique and already exists... 
+

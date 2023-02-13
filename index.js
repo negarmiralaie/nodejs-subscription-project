@@ -71,6 +71,4 @@ server.listen(PORT, () => {
     process.env.SERVER_ADDR = server.address().address;
   if (!process.env.APP_PORT)
     process.env.APP_PORT = server.address().port.toString();
-  if (!process.env.REFRESH_TOKEN_EXPIRE_AFTER)
-    process.env.REFRESH_TOKEN_EXPIRE_AFTER = 2592000;
 });
