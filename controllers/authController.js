@@ -48,7 +48,43 @@ const authController = {
         return response.customError(res, res.t('Server.Internall'), 500, err);
       }
   },
+
+  login: async (req, res) => {
+    try {
+      const schema = joi.object().keys({
+        username: joi.string().alphanum().required(),
+      });
+
+      const { error, value } = schema.validate(req.body, { abortEarly: true });
+      if (error) return response.validation(res, error);
+
+      const customer = await db.Customer.findOne({ where: { username: value.username } });
+
+      if (!customer) {
+        return response.validation(
+          res,
+          res.t('CRUD.Not_Found', { name: res.t('joi.field.customer') })
+        );
+      }
+      
+      // const isOk = await Helper.Compare(value.password);
+      // if (!isOk) return response.validation(res, res.t('auth.Wrong_User_Pass'));
+
+      //~ LETS DISCUSS WHAT HAPPENS BELOW... FIRST AN ACCESS TOKEN WILL BE CREATED
+      const { accessToken } = await AuthHandler.TokenGen(customer);
+
+      res.setHeader('Authentication', accessToken);
+      
+      console.log('customer', customer);
+      return response.success(res, {
+        customer,
+        accessToken,
+      });
+    } catch (err) {
+      console.log(err);
+      return response.customError(res, res.t('Server.Internall'), 500, err);
+    }
+  },
 };
 
 module.exports = authController;
-// THIS LINE IS ADDED ON SATURDAY 5TH OF NOVEMBER.....
