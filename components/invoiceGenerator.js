@@ -12,6 +12,9 @@ const GenerateInvoice = async () => {
         subscriptions[i].dataValues.isActive ? await db.Invoice.create({ name: 'sampleInvoiceName', price: subscriptions[i].dataValues.price, isActive: true}) : '';
         console.log('customers[i].dataValues.username', customers[i].dataValues.username);
         console.log('subscriptions[i].dataValues.price', subscriptions[i].dataValues.price);
+        // Now decrease user's credit
+        customers[i].credit = customers[i].creadit - subscriptions[i].price;
+        await customers[i].save();
       }
     }
 }

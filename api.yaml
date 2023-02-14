@@ -9,6 +9,112 @@ info:
 schemas: [http]
 
 paths:
+  /api/v1/auth/register:
+    post:
+      summary: For registering a new user.
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: register
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+              required: true
+      responses:
+        200:
+          description: Success. User is created. AccessToken and customer info is sent back in an object called "data" and a success message is sent as well.
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  customer:
+                    type: object
+                      properties:
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                        id:
+                          type: string
+                        username:
+                          type: string
+                        credit:
+                          type: string
+                  accessToken:
+                    type: string
+        400:
+          description: Bad Request. User input is not valid.
+          schema: 
+            type: object
+            properties:
+              success:
+                type: boolean
+              error:
+                type: string
+        409:
+          description: Bad Request. User is already registered.
+
+  /api/v1/auth/login:
+    post:
+      summary: For logging in a user.
+      description: User must be already registered. He must enter email or phone number that he used for registration.
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: login
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  customer:
+                    type: object
+                      properties:
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                        id:
+                          type: string
+                        username:
+                          type: string
+                        credit:
+                          type: string
+                  accessToken:
+                    type: string
+              required: true
+      responses:
+        200: 
+          description: Success. User is logged in. accessToken and customer info and userId is sent in an object called "data".
+          schema:
+            type: object
+            properties:
+              5data:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string
+                  userId:
+                    type: string
+              message:
+                type: string
+                example: "logged in successfully"
+        400: 
+          description: Bad Request. User input is not valid.
+        401:
+          description: Unauthorized. Phone number or password is incorrect.
+        404: 
+          description: Not Found. User is not registered.
+
   /api/v1/subscription/create:
     post:
       summary: For creating a subscription.
@@ -34,11 +140,137 @@ paths:
         schema:
           type: string
 #       # 400:
-#         # description: Bad Request. New password and confirmNewPassword do not match.
 #         # schema:
 #           # type: string
 #       # 401:
-#         # description: Unauthorized. Must be logged in and have enough permissions...
 #       # 404:
 #         # description: Not Foud. CRUD.Duplicated. -> When abbrvCode is not unique and already exists... 
+  /api/v1/subscription/list:
+    get:
+      summary: For listing subscriptions.
+    responses:
+      200:
+        description: Success.
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "CRUD.Success"
+            data:
+              type: object
+              properties:
+                docs:
+                  type: array
+                  items:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    price:
+                      type: number
+                    isActive:
+                      type: bool
+                    createdAt:
+                      type: string
+                    updatedAt:
+                      type: string
+                    customer_id:
+                      type: string
+
+  /api/v1/subscription/toggleIsActive:
+      get:
+        summary: For toggleing isActive.
+        description: User should provide name of the subscription to toggle its isActive.
+        parameters:
+        - in: query
+          name: filter[where][name]
+          type: string
+          required: true
+      responses:
+        200:
+          description: Success.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "CRUD.Create"
+              data:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      price:
+                        type: number
+                      isActive:
+                        type: bool
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      customer_id:
+                        type: string
+
+  /api/v1/invoice/list:
+    get:
+      summary: For listing invoices.
+    responses:
+      200:
+        description: Success.
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "CRUD.Success"
+            data:
+              type: object
+              properties:
+                docs:
+                  type: array
+                  items:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    price:
+                      type: number
+                    isActive:
+                      type: bool
+                    createdAt:
+                      type: string
+                    updatedAt:
+                      type: string
+                    customer_id:
+                      type: string
+
+  /api/v1/invoice/report:
+      get:
+        summary: For getting report of invoices.
+      responses:
+        200:
+          description: Success.
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "CRUD.Success"
+              data:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      Number of invoices:
+                        type: string
+                      Total price:
+                        type: string
+
 
