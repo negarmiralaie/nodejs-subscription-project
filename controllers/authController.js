@@ -48,7 +48,6 @@ const authController = {
         return response.customError(res, res.t('Server.Internall'), 500, err);
       }
   },
-
   login: async (req, res) => {
     try {
       const schema = joi.object().keys({
