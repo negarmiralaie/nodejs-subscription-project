@@ -61,6 +61,27 @@ const invoiceController = {
     } catch (error) {
       return response.catchError(res, error);
     }  },
+
+    report: async (req, res) => {
+        try {
+            const customer_id = req.customer.id;
+            const subscriptions = await db.Subscription.findAll({ where: {customer_id} });
+            
+            let totalInvoicesCount = 0;
+            let totalInvoicesPrice = 0;
+
+            for (let i=0; i<subscriptions.length ;i++){
+                const { count: invoicesCount, rows: invoices } = await base.findAndCountAll();
+                totalInvoicesCount += invoicesCount;
+                for (let i=0; i< invoices.length; i++){
+                    totalInvoicesPrice += invoices[i].dataValues.price;
+                }
+            }
+
+            return response.success(res, {'Number of invoices': totalInvoicesCount, 'Total price': totalInvoicesPrice}, res.t('CRUD.Success'));
+        } catch (error) {
+            return response.catchError(res, error);
+        }  },
 };
 
 module.exports = invoiceController;
