@@ -341,3 +341,16 @@
 [0mPOST /api/v1/subscription/create [32m200[0m 28.158 ms - 181[0m
 [0mGET /api/v1/invoice/list [33m401[0m 9.450 ms - 12[0m
 [0mGET /api/v1/invoice/list [32m200[0m 271.770 ms - 17903[0m
+[0mGET /api/v1/invoice/report [33m401[0m 8.692 ms - 12[0m
+[0mGET /api/v1/invoice/report [31m500[0m 93.036 ms - 737[0m
+[0mGET /api/v1/invoice/list [32m200[0m 132.587 ms - 17903[0m
+[0mGET /api/v1/invoice/report [31m500[0m 559.378 ms - 41[0m
+[0mGET /api/v1/invoice/report [32m200[0m 388.000 ms - 76[0m
+[0mGET /api/v1/invoice/report [31m500[0m 100.766 ms - 41[0m
+[0mGET /api/v1/invoice/report [31m500[0m 122.104 ms - 41[0m
+[0mGET /api/v1/invoice/report [32m200[0m 149.099 ms - 76[0m
+[0mGET /api/v1/invoice/report [32m200[0m 139.453 ms - 93[0m
+[0mGET /api/v1/invoice/report [32m200[0m 116.268 ms - 93[0m
+[0mGET /api/v1/invoice/report [32m200[0m 32.270 ms - 93[0m
+[0mGET /api/v1/invoice/report [32m200[0m 70.058 ms - 92[0m
+[0mGET /api/v1/invoice/report [32m200[0m 27.033 ms - 92[0m

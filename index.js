@@ -68,7 +68,7 @@ const server = http.createServer(app);
 
 
 const timer = 10 * 60 * 1000;
-  // const myInterval = setInterval(invoiceGenerator, timer);
+const myInterval = setInterval(invoiceGenerator, timer);
   
 
 server.listen(PORT, () => {

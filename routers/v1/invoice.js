@@ -9,5 +9,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/list', auth(), invoiceController.list);
+router.get('/report', auth(), invoiceController.report);
 
 module.exports = router;
