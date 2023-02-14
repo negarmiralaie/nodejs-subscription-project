@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Invoice.init({
-    name: {
+    name: { //! DELETE THIS ONEEEEEEEEE!!!!!!!!! AND UPDATE INVOICE GENERATOR
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
-    isActive: {
+    isActive: { //! DELETE THIS ONEEEEEEEEE!!!!!!!!! AND UPDATE INVOICE GENERATOR
         type: DataTypes.BOOLEAN,
         allowNull: false,
     },

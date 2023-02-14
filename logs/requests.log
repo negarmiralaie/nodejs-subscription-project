@@ -284,3 +284,7 @@
 [0mPOST /api/v1/subscription/create [32m200[0m 86.575 ms - 2[0m
 [0mPOST /api/v1/subscription/create [32m200[0m 158.186 ms - 179[0m
 [0mPOST /api/v1/subscription/create [32m200[0m 156.061 ms - 179[0m
+[0mGET /api/v1/subscription/list [33m404[0m 16.629 ms - 163[0m
+[0mGET /api/v1/subscription/list [33m401[0m 34.790 ms - 12[0m
+[0mPOST /api/v1/auth/login [32m200[0m 291.486 ms - 323[0m
+[0mGET /api/v1/subscription/list [32m200[0m 85.429 ms - 1243[0m

@@ -9,5 +9,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/create', auth(), subscriptionController.create);
+router.get('/list', auth(), subscriptionController.list);
 
 module.exports = router;
