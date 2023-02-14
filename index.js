@@ -9,6 +9,7 @@ const helmet = require('helmet');
 const localizify = require('localizify');
 const swaggerUI = require('swagger-ui-express');
 const YAML = require('yamljs');
+const invoiceGenerator = require('./components/invoiceGenerator');
 //-------------------------------> END OF IMPORTS <-------------------------------
 
 dotenv.config();
@@ -65,10 +66,15 @@ app.use((err, req, res, next) => {
 
 const server = http.createServer(app);
 
+
+const timer = 10 * 60 * 1000;
+  const myInterval = setInterval(invoiceGenerator, timer);
+  
+
 server.listen(PORT, () => {
   console.log('Server started listening on : ', server.address());
   if (!process.env.SERVER_ADDR)
     process.env.SERVER_ADDR = server.address().address;
-  if (!process.env.APP_PORT)
+    if (!process.env.APP_PORT)
     process.env.APP_PORT = server.address().port.toString();
-});
+  });
