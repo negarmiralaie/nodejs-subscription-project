@@ -1,4 +1,3 @@
-
 class ErrorHandler extends Error {
     message
     status

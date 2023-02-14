@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Invoice.init({
-    name: {
+    name: { //! DELETE THIS ONEEEEEEEEE!!!!!!!!!
       type: DataTypes.STRING,
       allowNull: false,
     },
