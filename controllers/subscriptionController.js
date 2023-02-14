@@ -20,6 +20,30 @@ const subscriptionController = {
       const customer = req.customer;
       value.customer_id = customer.id;
 
+      const duplicate = await base.findAll({
+        where: {
+            [Op.and]: [
+              {
+                customer_id: customer.id
+              },
+              {
+                name: value.name,
+              },
+            ],
+        },
+      });
+      console.log('duplicate', duplicate)
+
+      if (duplicate.length > 0) {
+        return response.customError(
+          res,
+          res.t('CRUD.Duplicated', {
+            name: res.t('joi.hybrid.name'),
+          }),
+          404
+        );
+      }
+
       const subscription = await base.create(value);
       console.log('subscription', subscription)
 
@@ -85,6 +109,51 @@ const subscriptionController = {
       return response.catchError(res, error);
     }  },
 
+  toggleIsActive: async (req, res) => {
+    try {
+      const Schema = joi.object().keys({
+        filter: joi
+          .object()
+          .keys({
+            where: joi
+            .object()
+            .keys({
+              name: joi.string(),
+            })
+            .default({}),
+          })
+      });
+
+      const { error, value } = Schema.validate(req.query, { abortEarly: true });
+      if (error) return response.validation(res, error);
+      
+      const customer_id = req.customer.id;
+
+      let where = {};
+      if (value.filter.where) {
+        where = {
+          ...value.filter.where,
+        };
+      }
+
+      where.customer_id = customer_id;
+      const subscription = await base.findOne({ where });
+      if (subscription) {
+        subscription.isActive = subscription.isActive !== false ? false : true;
+        await subscription.save();
+        return response.success(res, subscription, res.t('CRUD.Create'));
+      } else {
+        return response.customError(
+          res,
+          res.t('CRUD.Not_Found', { name: res.t('joi.field.name') }),
+          404
+        );
+      }
+
+    } catch (error) {
+      return response.catchError(res, error);
+    }
+  },
 };
 
 module.exports = subscriptionController;

@@ -10,5 +10,6 @@ router.get('/', (req, res) => {
 
 router.post('/create', auth(), subscriptionController.create);
 router.get('/list', auth(), subscriptionController.list);
+router.get('/toggleIsActive', auth(), subscriptionController.toggleIsActive);
 
 module.exports = router;
