@@ -336,3 +336,6 @@
 [0mGET /api/v1/subscription/toggleIsActive?filter[where][name]=name2 [32m200[0m 14.311 ms - 179[0m
 [0mGET /api/v1/subscription/toggleIsActive?filter[where][name]=name2 [32m200[0m 15.999 ms - 179[0m
 [0mGET /api/v1/subscription/list [32m200[0m 37.921 ms - 1243[0m
+[0mPOST /api/v1/subscription/create [31m500[0m 91.904 ms - 41[0m
+[0mPOST /api/v1/subscription/create [33m404[0m 95.853 ms - 29[0m
+[0mPOST /api/v1/subscription/create [32m200[0m 28.158 ms - 181[0m

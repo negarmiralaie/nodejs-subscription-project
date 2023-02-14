@@ -20,6 +20,30 @@ const subscriptionController = {
       const customer = req.customer;
       value.customer_id = customer.id;
 
+      const duplicate = await base.findAll({
+        where: {
+            [Op.and]: [
+              {
+                customer_id: customer.id
+              },
+              {
+                name: value.name,
+              },
+            ],
+        },
+      });
+      console.log('duplicate', duplicate)
+
+      if (duplicate.length > 0) {
+        return response.customError(
+          res,
+          res.t('CRUD.Duplicated', {
+            name: res.t('joi.hybrid.name'),
+          }),
+          404
+        );
+      }
+
       const subscription = await base.create(value);
       console.log('subscription', subscription)
 
