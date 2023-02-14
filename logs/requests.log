@@ -339,3 +339,5 @@
 [0mPOST /api/v1/subscription/create [31m500[0m 91.904 ms - 41[0m
 [0mPOST /api/v1/subscription/create [33m404[0m 95.853 ms - 29[0m
 [0mPOST /api/v1/subscription/create [32m200[0m 28.158 ms - 181[0m
+[0mGET /api/v1/invoice/list [33m401[0m 9.450 ms - 12[0m
+[0mGET /api/v1/invoice/list [32m200[0m 271.770 ms - 17903[0m
